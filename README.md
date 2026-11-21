@@ -77,3 +77,10 @@ Todos os arquivos ficam na **raiz** do repositório para carregamento direto em 
 
 - Leandro Silva Santos
 - Nicolas Gabriel Alves Ramalho
+
+---
+
+## ⚠️ Observações Importantes
+
+- A biblioteca `E1_Impressora01.dll` deve ser obrigatoriamente a versão **x86 (32 bits)** para funcionar com o compilador MinGW sem erro de carregamento.
+- Antes de executar qualquer função de impressão ou gaveta, é necessário selecionar primeiro a **opção 1 (Configurar Conexão)** e depois a **opção 2 (Abrir Conexão)**.
