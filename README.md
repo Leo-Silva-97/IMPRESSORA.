@@ -1,79 +1,44 @@
-# 🖨️ Integração Java com Impressora Elgin i9
-### *(Coloque aqui o nome do seu projeto)*
+# 🖨️ Terminal Elgin i8/i9 em C
+### *Controle e Automação de Impressora Térmica Elgin via DLL Nativa*
 ---
 
 ## 📘 Sobre o Projeto
 
-Este projeto foi desenvolvido por alunos com o objetivo de criar uma aplicação Java capaz de se comunicar com a impressora **Elgin i9**, utilizando comandos **ESC/POS**, testes de impressão e interação via porta de comunicação.  
-O trabalho faz parte da disciplina de **Programação Orientada a Objetos**.
+Sistema de linha de comando desenvolvido em **linguagem C** para comunicação, automação e testes de impressão com impressoras térmicas **Elgin i8 e i9** no Windows, utilizando carregamento dinâmico da biblioteca oficial `E1_Impressora01.dll` (via API Win32 `LoadLibraryA` / `GetProcAddress`).
 
 ---
 
 ## 🧰 Tecnologias Utilizadas
 
-- **Java 17**
-- **IntelliJ IDEA**
-- **Biblioteca ESC/POS**
-- **Driver/SDK da Elgin i9**
-- *(Opcional)* Maven ou Gradle
+- **Linguagem:** C (C99+)
+- **Sistema Operacional:** Windows
+- **Compilador:** MinGW (GCC 32 bits / x86)
+- **Biblioteca Nativa:** `E1_Impressora01.dll` (arquitetura x86)
+- **Arquivos de Teste SAT:** `XMLSAT.xml` e `CANC_SAT.xml` na raiz do projeto
 
 ---
 
 ## 📁 Estrutura do Projeto
 
-/src → Código-fonte principal
-/lib → Bibliotecas e dependências externas
-/docs → Materiais adicionais e documentação
-/examples → Testes e arquivos de demonstração
+Todos os arquivos ficam na **raiz** do repositório para carregamento direto em tempo de execução:
 
+- `a.c` → Código-fonte principal do sistema
+- `E1_Impressora01.dll` → Biblioteca dinâmica da Elgin (x86 / 32 bits)
+- `XMLSAT.xml` → Arquivo de exemplo para impressão de cupom fiscal SAT
+- `CANC_SAT.xml` → Arquivo de exemplo para impressão de cancelamento SAT
+- `.gitignore` → Ignora arquivos compilados (`.exe`)
+- `README.md` → Documentação do projeto
 
 ---
 
-## ⚙️ Instalação e Execução
+## ⚙️ Instalação, Compilação e Execução
 
 ### 🔽 1. Baixar o Projeto do GitHub
-1. Acesse o repositório.
-2. Clique no botão **Code**.
-3. Selecione **Download ZIP**.
-4. Aguarde o download.
+1. Acesse o repositório e clique no botão verde **Code** → **Download ZIP** (ou use `git clone`).
+2. Extraia o arquivo ZIP para uma pasta local.
 
-### 📦 2. Extrair o Arquivo ZIP
-1. Vá até o local onde o arquivo foi salvo.
-2. Clique com o botão direito → **Extrair aqui** / **Extract All**.
-3. Será criada uma nova pasta com os arquivos.
-
-### 🧭 3. Importar no IntelliJ IDEA
-1. Abra o **IntelliJ IDEA**.
-2. Clique em **Open**.
-3. Escolha a pasta extraída.
-4. Aguarde o carregamento.
-5. Caso apareça, clique em **Import Project** (Maven/Gradle).
-6. Verifique o SDK em:
-   - *File → Project Structure → Project SDK → Java 17*
-7. Abra o arquivo `Main.java` e clique em ▶️ **Run**.
-
----
-
-## 🧪 Testes
-
-- Teste de conexão com a impressora
-- Impressão de texto simples
-- Envio de comandos **ESC/POS**
-- Verificação das portas de comunicação
-- Teste com várias mensagens
-
----
-
-## 📚 Documentação Adicional
-
-- Manual da Impressora **Elgin i9**
-- Documentação do **SDK Elgin**
-- Referência **ESC/POS**
-
----
-
-## 👥 Autores  
-
-- Leandro Silva Santos
-- Nicolas Gabriel Alves Ramalho
-
+### 🛠️ 2. Compilar o Código em C
+1. Abra o terminal (Prompt de Comando, PowerShell ou terminal integrado do VS Code) na pasta raiz do projeto.
+2. Compile o arquivo `a.c` utilizando o GCC (MinGW 32 bits):
+   ```bash
+   gcc a.c -o impressora.exe
