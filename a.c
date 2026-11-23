@@ -221,6 +221,9 @@ void imprimirTexto(void) {
             int retorno = ImpressaoTexto(texto, 1, 4, 0);
             if(retorno >= 0){
                 printf("Copia %d impressa.\n", i);
+                if(AvancaPapel != NULL){
+                    AvancaPapel(2);
+                }
         }else{
             printf("Erro ao imprimir. Codigo de erro: %d\n", retorno);
         }
@@ -230,7 +233,7 @@ void imprimirTexto(void) {
 
 void imprimirQRCode(void) {
     if(!conexaoAberta){
-        printf("Conexao fechada.\n");
+        printf("Conexao fechada. Abra a conexao antes (opcao 2).\n");
         return;
     }
 
@@ -247,7 +250,7 @@ void imprimirQRCode(void) {
 
 void imprimirCodigoBarras(void) {
     if(!conexaoAberta){
-        printf("Conexao fechada. Abra a conexao antes (opcao 2)\n");
+        printf("Conexao fechada. Abra a conexao antes (opcao 2).\n");
         return;
     }
     int retorno = ImpressaoCodigoBarras(8, "{A012345678912", 100, 2, 3);
