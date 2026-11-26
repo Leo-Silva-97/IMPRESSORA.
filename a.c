@@ -169,10 +169,38 @@ static char *lerArquivo(const char *caminho) {
 
 void configurarConexao(void) {
     if (!conexaoAberta) {
-        tipo = lerInteiro("Digite o tipo de conexao (1 para USB, 2 para Serial, etc.): ");
-        capturarEntrada("Digite o modelo da impressora: ", modelo, sizeof(modelo));
-        capturarEntrada("Digite a porta de conexao (ex: USB): ", conexao, sizeof(conexao));
-        parametro = lerInteiro("Digite o parametro adicional (ex: 0 para padrao): ");
+        while (1) {
+            tipo = lerInteiro("Digite o tipo de conexao (1 para USB, 2 para Serial, 3 para Rede): ");
+            if (tipo >= 1 && tipo <= 3) {
+                break;
+            }
+            printf("Opcao invalida! Digite 1, 2 ou 3.\n");
+        }
+
+        while (1) {
+            capturarEntrada("Digite o modelo da impressora (i8 ou i9): ", modelo, sizeof(modelo));
+            if (strcmp(modelo, "i8") == 0 || strcmp(modelo, "i9") == 0) {
+                break;
+            }
+            printf("Modelo invalido! Digite exatamente 'i8' ou 'i9'.\n");
+        }
+
+        while (1) {
+            capturarEntrada("Digite a porta de conexao (ex: USB): ", conexao, sizeof(conexao));
+            if (strcmp(conexao, "USB") == 0) {
+                break;
+            }
+            printf("Porta invalida! Digite exatamente 'USB'.\n");
+        }
+
+        while (1) {
+            parametro = lerInteiro("Digite o parametro adicional (ex: 0 para padrao): ");
+            if (parametro == 0) {
+                break;
+            }
+            printf("Parametro invalido! Digite 0 para o padrao.\n");
+        }
+
         printf("Parametros de conexao configurados com sucesso.\n");
     } else {
         printf("Conexao ja configurada. Pronta para uso.\n");
@@ -215,6 +243,7 @@ void imprimirTexto(void) {
 
         char texto[200];
         capturarEntrada("Texto a imprimir: ", texto, sizeof(texto));
+        strcat(texto, "\n");
 
         int copias = lerInteiro("Quantas copias? ");
         for (int i = 1; i <= copias; i++){
@@ -222,8 +251,9 @@ void imprimirTexto(void) {
             if(retorno >= 0){
                 printf("Copia %d impressa.\n", i);
                 if(AvancaPapel != NULL){
-                    AvancaPapel(2);
+                    AvancaPapel(1);
                 }
+                Sleep(150);
         }else{
             printf("Erro ao imprimir. Codigo de erro: %d\n", retorno);
         }
